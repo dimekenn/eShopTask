@@ -1,0 +1,673 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "eshop",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cart": {
+      "get": {
+        "summary": "GetCustomerCart",
+        "operationId": "GetCustomerCart",
+        "responses": {
+          "200": {
+            "description": "cart found",
+            "schema": {
+              "$ref": "#/definitions/protoGetCustomerCartRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "cart not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "tags": [
+          "eShopTask"
+        ]
+      },
+      "post": {
+        "summary": "AddToCustomerCart",
+        "operationId": "AddToCustomerCart",
+        "responses": {
+          "200": {
+            "description": "cart found",
+            "schema": {
+              "$ref": "#/definitions/protoAddToCustomerCartRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "cart not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoAddToCustomerCartReq"
+            }
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    },
+    "/cart/{id}": {
+      "delete": {
+        "summary": "DeleteFromCustomerCart",
+        "operationId": "DeleteFromCustomerCart",
+        "responses": {
+          "200": {
+            "description": "cart product deleted",
+            "schema": {
+              "$ref": "#/definitions/protoDeleteFromCustomerCartRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "cart not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    },
+    "/carts": {
+      "get": {
+        "summary": "GetAllCarts",
+        "operationId": "GetAllCarts",
+        "responses": {
+          "200": {
+            "description": "carts found",
+            "schema": {
+              "$ref": "#/definitions/protoGetAllCartsRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "carts not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    },
+    "/product": {
+      "post": {
+        "summary": "AddNewProduct",
+        "operationId": "AddNewProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoAddNewProductRes"
+            }
+          },
+          "201": {
+            "description": "product success created",
+            "schema": {
+              "$ref": "#/definitions/protoAddNewProductRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoAddNewProductReq"
+            }
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      },
+      "put": {
+        "summary": "UpdateProduct",
+        "operationId": "UpdateProduct",
+        "responses": {
+          "200": {
+            "description": "product success updated",
+            "schema": {
+              "$ref": "#/definitions/protoUpdateProductRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "token is missing",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "product not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoUpdateProductReq"
+            }
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    },
+    "/signin": {
+      "post": {
+        "summary": "SignIn",
+        "operationId": "SignIn",
+        "responses": {
+          "200": {
+            "description": "user found",
+            "schema": {
+              "$ref": "#/definitions/protoSignInRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "401": {
+            "description": "password is incorrect",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "404": {
+            "description": "user not found",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoSignInReq"
+            }
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    },
+    "/signup": {
+      "post": {
+        "summary": "SignUp",
+        "operationId": "SignUp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoSignUpRes"
+            }
+          },
+          "201": {
+            "description": "user success created",
+            "schema": {
+              "$ref": "#/definitions/protoSignUpRes"
+            }
+          },
+          "400": {
+            "description": "json structure is not valid",
+            "schema": {
+              "$ref": "#/definitions/protoErrorNotFound"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoError"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/gatewayruntimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoSignUpReq"
+            }
+          }
+        ],
+        "tags": [
+          "eShopTask"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "gatewayruntimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "protoAddNewProductReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protoAddNewProductRes": {
+      "type": "object"
+    },
+    "protoAddToCustomerCartReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protoAddToCustomerCartRes": {
+      "type": "object"
+    },
+    "protoCartProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protoCustomerCart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cart_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protoDeleteFromCustomerCartRes": {
+      "type": "object"
+    },
+    "protoError": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "protoErrorNotFound": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetAllCartsRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoCartProduct"
+          }
+        }
+      }
+    },
+    "protoGetCustomerCartRes": {
+      "type": "object",
+      "properties": {
+        "carts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoCustomerCart"
+          }
+        }
+      }
+    },
+    "protoSignInReq": {
+      "type": "object",
+      "properties": {
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "protoSignInRes": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Role_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoSignUpReq": {
+      "type": "object",
+      "properties": {
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "User_roles": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "protoSignUpRes": {
+      "type": "object",
+      "properties": {
+        "Msg": {
+          "type": "string"
+        }
+      }
+    },
+    "protoUpdateProductReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "protoUpdateProductRes": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    }
+  }
+}
