@@ -44,3 +44,4 @@ create table cart_products
     constraint fk_product_id foreign key (product_id) references products (id)
 );
 
+insert into roles (id, name) vales (1, 'manager'), (2, 'user');

@@ -20,12 +20,14 @@ func NewHandler(userService service.UserService, managerService service.ManagerS
 	return &Handler{managerService: managerService, userService: userService, authorizationService: authorizationService}
 }
 
+//accept username, password, role_ids[]: manager = 1, user = 2
 func (h *Handler) SignUp(c echo.Context) error  {
 	var req models.User
 	if bErr := c.Bind(&req); bErr != nil{
 		log.Warnf("bad request: %v", bErr)
 		return echo.NewHTTPError(http.StatusBadRequest, bErr)
 	}
+
 	res, err := h.authorizationService.SignUp(c.Request().Context(), &req)
 	if err != nil{
 		return err
@@ -53,7 +55,7 @@ func (h *Handler) SignIn(c echo.Context) error  {
 	log.Infof("Success signIp response: %v", res)
 	return c.JSON(http.StatusOK, res)
 }
-
+//accept name, description count
 func (h *Handler) CreateNewProduct(c echo.Context) error  {
 	if isManager := validateManager(c); !isManager{
 		return echo.NewHTTPError(http.StatusForbidden, "not allowed")
@@ -70,7 +72,7 @@ func (h *Handler) CreateNewProduct(c echo.Context) error  {
 	log.Infof("Product %v success created", id)
 	return c.JSON(http.StatusOK, id)
 }
-
+//accept all fields of model
 func (h *Handler) UpdateProduct(c echo.Context) error {
 	if isManager := validateManager(c); !isManager{
 		return echo.NewHTTPError(http.StatusForbidden, "not allowed")
@@ -88,6 +90,7 @@ func (h *Handler) UpdateProduct(c echo.Context) error {
 	return nil
 }
 
+//empty request with token
 func (h *Handler) GetAllCarts(c echo.Context) error {
 	if isManager := validateManager(c); !isManager{
 		return echo.NewHTTPError(http.StatusForbidden, "not allowed")
@@ -99,6 +102,7 @@ func (h *Handler) GetAllCarts(c echo.Context) error {
 	log.Infof("Success response: %v", res)
 	return c.JSON(http.StatusOK, res)
 }
+
 
 func (h *Handler) AddProductToCart(c echo.Context) error {
 	if isUser := validateUser(c); !isUser{

@@ -15,7 +15,7 @@ var fs embed.FS
 
 const configName = "config.json"
 
-func main()  {
+func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -28,14 +28,11 @@ func main()  {
 	//creating config entity to deserialize configs.json
 	cfg := configs.NewConfig()
 
-	if os.Getenv("port") != "" && os.Getenv("db") != ""{
-		cfg.Port = os.Getenv("port")
-		cfg.DbUrl = os.Getenv("db")
-	}else {
-		if unmErr := json.Unmarshal(data, &cfg); unmErr != nil {
-			log.Fatal(unmErr)
-		}
+	if unmErr := json.Unmarshal(data, &cfg); unmErr != nil {
+		log.Fatal(unmErr)
 	}
+
+	cfg.DB.Password = os.Getenv("db_password")
 
 	errCh := make(chan error, 1)
 
@@ -43,4 +40,3 @@ func main()  {
 
 	log.Fatalf("%v", <-errCh)
 }
-

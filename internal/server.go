@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"fmt"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/labstack/echo/v4"
 	"taskESchop/internal/configs"
@@ -15,7 +16,7 @@ import (
 func StartHTTPServer(ctx context.Context, errCh chan<- error, cfg *configs.Configs) {
 	app := echo.New()
 
-	pool, poolErr := initDb(ctx, cfg.DbUrl)
+	pool, poolErr := initDb(ctx, cfg)
 	if poolErr != nil {
 		errCh <- poolErr
 		return
@@ -46,8 +47,8 @@ func StartHTTPServer(ctx context.Context, errCh chan<- error, cfg *configs.Confi
 	errCh <- app.Start(cfg.Port)
 }
 
-func initDb(ctx context.Context, url string) (*pgxpool.Pool, error) {
-	conf, cfgErr := pgxpool.ParseConfig(url)
+func initDb(ctx context.Context, cfg *configs.Configs) (*pgxpool.Pool, error) {
+	conf, cfgErr := pgxpool.ParseConfig(fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", cfg.DB.Host, cfg.DB.Port, cfg.DB.User, cfg.DB.Password, cfg.DB.Name))
 	if cfgErr != nil {
 		return nil, cfgErr
 	}

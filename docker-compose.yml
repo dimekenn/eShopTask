@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  server:
+    build: ./
+    command: ./app
+    depends_on:
+      - eshop_db
+    environment:
+      - port=:9090
+      - db=db
+
+  eshop_db:
+    restart: always
+    image: dimekenn/eshop_db:eshop_db
+    volumes:
+    - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - db_password:mypassword
+    ports:
+    - 5439:5432

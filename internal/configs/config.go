@@ -2,9 +2,19 @@ package configs
 
 type Configs struct {
 	Port  string `json:"port"`
-	DbUrl string `json:"db_url"`
+	DB *DB `json:"db"`
+}
+
+type DB struct {
+	Host string `json:"host"`
+	Password string `json:"password"`
+	User string `json:"user"`
+	Port string `json:"port"`
+	Name string `json:"name"`
 }
 
 func NewConfig() *Configs {
-	return &Configs{}
+	return &Configs{
+		DB: &DB{},
+	}
 }

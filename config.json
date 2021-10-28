@@ -1,4 +1,9 @@
 {
-  "port": ":1212",
-  "db_url": "postgres://postgres:mypassword@localhost:5432/postgres?sslmode=disable"
+  "port": ":8080",
+  "db": {
+    "host": "eshop_db",
+    "port": "5432",
+    "user": "postgres",
+    "name": "postgres"
+  }
 }
