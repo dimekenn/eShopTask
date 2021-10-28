@@ -1,4 +1,4 @@
 {
-  "port": ":9091",
+  "port": ":1212",
   "db_url": "postgres://postgres:mypassword@localhost:5432/postgres?sslmode=disable"
 }

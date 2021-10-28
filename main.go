@@ -5,6 +5,7 @@ import (
 	"embed"
 	"encoding/json"
 	"log"
+	"os"
 	"taskESchop/internal"
 	"taskESchop/internal/configs"
 )
@@ -23,10 +24,17 @@ func main()  {
 	if readErr != nil {
 		log.Fatal(readErr)
 	}
+
 	//creating config entity to deserialize configs.json
 	cfg := configs.NewConfig()
-	if unmErr := json.Unmarshal(data, &cfg); unmErr != nil {
-		log.Fatal(unmErr)
+
+	if os.Getenv("port") != "" && os.Getenv("db") != ""{
+		cfg.Port = os.Getenv("port")
+		cfg.DbUrl = os.Getenv("db")
+	}else {
+		if unmErr := json.Unmarshal(data, &cfg); unmErr != nil {
+			log.Fatal(unmErr)
+		}
 	}
 
 	errCh := make(chan error, 1)
